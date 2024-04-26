@@ -27,15 +27,20 @@ actual fun MapView(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT
                     )
-                    val maps = MapKitMap(maps = this)
+                    val mapKit = MapKitMap()
                     this.settings.javaScriptEnabled = true
                     webViewClient = object : WebViewClient(){
                         override fun onPageFinished(view: WebView?, url: String?) {
                             super.onPageFinished(view, url)
-                          onMapLoaded(maps)
+                            val centerStr = "[${center.longitude},${center.latitude}]"
+                            view?.loadUrl("javascript:LoadMapsKit('$style',$centerStr, $zoom);")
+                        //                        view?.loadUrl("javascript:addMarker(5.33125, -4.02375);")
+                           view ?.let {  mapKit.setMap(view) }
+                            onMapLoaded(mapKit)
                         }
                     }
-                    loadDataWithBaseURL(null, MapKitContent.defaultHtmlContent, "text/html", "UTF-8", null)
+                    loadUrl("file:///android_asset/index.html")
+//                    loadDataWithBaseURL(null, MapKitContent.defaultHtmlContent, "text/html", "UTF-8", null)
                     
                 }
             },

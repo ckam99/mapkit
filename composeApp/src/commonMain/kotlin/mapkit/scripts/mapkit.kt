@@ -2,10 +2,10 @@ package mapkit.scripts
 
 
 object MapKitContent {
-   val defaultHtmlContent = mapKitDefaultHtmlContent
+   val defaultHtmlContent = mapKitHtmlContent
 }
 
-val mapKitDefaultHtmlContent = """
+val mapKitHtmlTestContent = """
 <!DOCTYPE html>
 <html>
     <head>

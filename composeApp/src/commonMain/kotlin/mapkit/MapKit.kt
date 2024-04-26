@@ -1,6 +1,9 @@
 package mapkit
 
 
-expect class MapKitMap(maps: Any) {
+expect class MapKitMap {
     fun addLayer()
+    fun setMap(maps : Any)
+    fun zoomIn()
+    fun zoomOut()
 }

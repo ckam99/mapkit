@@ -27,13 +27,14 @@ fun App() {
     var maps : MapKitMap? by remember {
         mutableStateOf(null)
     }
+    val mapState = rememberMapKitState()
 
     MaterialTheme {
-        val style = "http://192.168.0.116:8080/styles/ls3/style.json"
+        val style = "http://192.168.0.116:8080/styles/preview/style.json"
         val styleDark = "http://192.168.0.116:8080/styles/ds1/style.json"
     MapView(
         modifier = Modifier.fillMaxSize(),
-        state = rememberMapKitState(),
+        state = mapState,
         center = LatLng(5.33125, -4.02375),
         zoom = 14.0,
         style = if (isSystemInDarkTheme() ) styleDark else style
@@ -47,7 +48,10 @@ fun App() {
                         ) {
                             Column {
                                 Button(
-                                    onClick = { maps?.zoomIn() },
+                                    onClick = {
+                                        maps?.zoomIn()
+                                        mapState.map?.zoomIn()
+                                              },
 //                                    colors = IconButtonDefaults.filledIconButtonColors(),
                                 ) {
                                 Text("+")
@@ -58,6 +62,8 @@ fun App() {
                                     onClick = { maps?.zoomOut() }) {
                                     Text("-")
                                 }
+
+                                Text("${mapState.isLoaded}")
                             }
                         }
     }

@@ -10,16 +10,16 @@ actual class MapKitMap {
     actual fun addLayer() {}
 
     actual fun setMap(maps : Any) {
-        if (maps != null){
+//        if (maps != null){
             this.webView = maps as WKWebView
-        }
+//        }
     }
 
     actual fun zoomIn(){
-        webView?.evaluateJavaScript("zoomIn();", null)
+        webView?.evaluateJavaScript("window.zoomIn();", null)
     }
 
     actual fun zoomOut() {
-        webView?.evaluateJavaScript("zoomOut();", null)
+        webView?.evaluateJavaScript("window.zoomOut();", null)
     }
 }
